@@ -1,0 +1,19 @@
+server
+{
+	# server is listenning port 443 wich is default port for https and use ssl with HTTP/2 protocol
+	listen 443 ssl http2;
+
+	# same thing for IPV6 adresses
+	listen [::] : ssl http2;
+
+	# server name
+	server www.vstineau.42.fr;
+
+	# indicate where is the ssl certificate 
+	ssl_certificate /etc/nginx/ssl/fullchain.pem;
+	# indicate where is the private key associated to the ssl certificate 
+	ssl_certificate_key /etc/nginx/ssl/key.pem;
+	# TLS 1.3 only
+	ssl_protocols TLSv1.3;
+
+}
