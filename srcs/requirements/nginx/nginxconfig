@@ -11,8 +11,10 @@ server
 
 	# indicate where is the ssl certificate 
 	ssl_certificate /etc/nginx/ssl/fullchain.pem;
+
 	# indicate where is the private key associated to the ssl certificate 
 	ssl_certificate_key /etc/nginx/ssl/key.pem;
+
 	# TLS 1.3 only
 	ssl_protocols TLSv1.3;
 }

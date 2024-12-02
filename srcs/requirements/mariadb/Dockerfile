@@ -1,3 +1,4 @@
+
 #-----------------OS LAYER----------------#
 FROM debian:bullseye
 #-----------------------------------------#
@@ -7,20 +8,19 @@ LABEL version="1.0" maintainer="vstineau"
 #-----------------------------------------#
 
 #-------------INSTALL NGINX---------------#
-RUN apt-get update -y && apt-get install -y nginx 
-&& echo "include /etc/nginx/sites-enabled/*;" >> /etc/nginx/nginx.conf
+RUN apt-get update -y && apt-get install -y mariadb 
 #-----------------------------------------#
 
-#-------------CONFIGURE NGINX-------------#
-COPY nginxconfig /etc/nginx/sites-enabled/
+#-------------CONFIGURE MARIADB-------------#
+COPY mariadbconfig
 #-----------------------------------------#
 
-#-------------lISTEN PORT 443-------------#
-EXPOSE 443
+#-------------lISTEN PORT 3306-------------#
+EXPOSE 3306
 #-----------------------------------------#
 
 #-------------SET VOLUME DIRECTORY--------#
-VOLUME ~/inception/srcs/nginx
+VOLUME $HOME/data
 #-----------------------------------------#
 
 WORKDIR ~/inception/srcs/nginx

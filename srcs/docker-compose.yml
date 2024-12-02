@@ -1,0 +1,27 @@
+services:
+ web:
+  image: nginx
+  restart: always
+  ports:
+    - port
+  secret:
+    -secret
+  volumes:
+    -pathtovolume
+ db:
+  image: maridb
+  restart: always
+  secret:
+    -secret
+  volumes:
+    -pathtovolume
+ site:
+  image: wordpress
+  restart: always
+  ports:
+    - port
+  secret:
+    -secret
+  volumes:
+    -pathtovolume
+
