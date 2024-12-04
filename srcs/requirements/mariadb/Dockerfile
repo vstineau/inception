@@ -23,4 +23,6 @@ EXPOSE 3306
 VOLUME $HOME/data
 #-----------------------------------------#
 
-WORKDIR ~/inception/srcs/nginx
+ENTRYPOINT ["", ""]
+
+CMD ["", "", ""]
