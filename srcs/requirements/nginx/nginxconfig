@@ -1,10 +1,10 @@
 server
 {
 	# server is listenning port 443 wich is default port for https and use ssl with HTTP/2 protocol
-	listen 443 ssl http2;
+	listen 443 ssl;
 
 	# same thing for IPV6 adresses
-	listen [::] : ssl http2;
+	listen [::] : ssl;
 
 	# server name
 	server www.vstineau.42.fr;
