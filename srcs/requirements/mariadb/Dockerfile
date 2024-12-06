@@ -11,11 +11,11 @@ LABEL version="1.0" maintainer="vstineau"
 RUN apt-get update -y && apt-get install -y mariadb 
 #-----------------------------------------#
 
-#-------------CONFIGURE MARIADB-------------#
+#------------CONFIGURE MARIADB------------#
 COPY mariadbconfig
 #-----------------------------------------#
 
-#-------------lISTEN PORT 3306-------------#
+#-------------lISTEN PORT 3306------------#
 EXPOSE 3306
 #-----------------------------------------#
 

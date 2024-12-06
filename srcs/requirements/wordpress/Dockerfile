@@ -7,5 +7,6 @@ LABEL version="1.0" maintainer="vstineau"
 #------------------------------------------------------#
 
 #-------------INSTALL PHP-FPM + WORDPRESS--------------#
-RUN apk update -y && apk install -y php-fpm
+RUN apk update -y && apk add --no-cache -y 
+	\php-fpm
 #------------------------------------------------------#

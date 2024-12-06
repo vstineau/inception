@@ -17,4 +17,9 @@ server
 
 	# TLS 1.3 only
 	ssl_protocols TLSv1.3;
+
+	location /{
+		root /data/www;
+	}
+i		
 }

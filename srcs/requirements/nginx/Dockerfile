@@ -7,7 +7,7 @@ LABEL version="1.0" maintainer="vstineau"
 #-----------------------------------------#
 
 #-------------INSTALL NGINX---------------#
-RUN apt-get update -y && apt-get upgrade -y && apt-get install -y nginx
+RUN apt-get update -y && apt-get upgrade -y && apt-get install -y nginx && rm -rf /var/lib/apt/lists/* #delete the cache
 #&& echo "include /etc/nginx/sites-enabled/*;" >> /etc/nginx/nginx.conf
 #-----------------------------------------#
 
@@ -20,7 +20,7 @@ EXPOSE 443
 #-----------------------------------------#
 
 #-------------SET VOLUME DIRECTORY--------#
-VOLUME $HOME/data
+HOME/data
 #-----------------------------------------#
 
 #"daemons on" means nginx is running in the background but because we have one docker dedicated

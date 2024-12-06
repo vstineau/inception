@@ -2,20 +2,18 @@ services:
  web:
   image: nginx
   restart: always
-  secret:
-    - secret
   volumes:
     - ~/data/wordpress
   ports:
-      - "443"
+    - "443:443"
  db:
   image: mariadb
   restart: always
   secret:
     -secret
   volumes:
-    - ~/data/wordpress
- site:
+    - ~/data/wordpress:/var/www/html
+wordpress:
   image: wordpress
   restart: always
   ports:
