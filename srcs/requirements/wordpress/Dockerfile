@@ -6,11 +6,16 @@ FROM alpine:3.20
 LABEL version="1.0" maintainer="vstineau"
 #------------------------------------------------------#
 
-#-------------INSTALL PHP-FPM + WORDPRESS--------------#
-<<<<<<< Updated upstream
-RUN apk update -y && apk add --no-cache -y 
-	\php-fpm
-=======
-RUN apk update -y && apk upgrade -y && apk add -y php-fpm
->>>>>>> Stashed changes
+#--------INSTALL PHP-FPM + CURL -----------------------#
+RUN apk update -y && apk ugrade -y && apk add --no-cache -y \
+	php-fpm \
+	curl
+#------------------------------------------------------#
+
+#-------------INSTALL WORDPRESS CLI -------------------#
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+#------------------------------------------------------#
+
+#---------------lISTEN PORT 9000-----------------------#
+EXPOSE 9000
 #------------------------------------------------------#

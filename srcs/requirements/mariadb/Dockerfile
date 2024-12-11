@@ -7,22 +7,24 @@ FROM debian:bullseye
 LABEL version="1.0" maintainer="vstineau"
 #-----------------------------------------#
 
-#-------------INSTALL NGINX---------------#
-RUN apt-get update -y && apt-get install -y mariadb 
+#------------INSTALL MARIADB--------------#
+RUN apt-get update -y && apt-get install -y mariadb-server \
+		&& rm -rf /var/lib/apt/lists/* #delete the cache
 #-----------------------------------------#
 
 #------------CONFIGURE MARIADB------------#
-COPY mariadbconfig
+#COPY mariadbconfig
 #-----------------------------------------#
+
+COPY mariadb_setup.sh ~/
 
 #-------------lISTEN PORT 3306------------#
 EXPOSE 3306
 #-----------------------------------------#
 
-#-------------SET VOLUME DIRECTORY--------#
-VOLUME $HOME/data
+
+ENTRYPOINT ["sh", "~/mariadb_setup.sh"]
+
 #-----------------------------------------#
+CMD ["mariadbd"]
 
-ENTRYPOINT ["", ""]
-
-CMD ["", "", ""]

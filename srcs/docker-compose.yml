@@ -1,25 +1,27 @@
 services:
   web:
-		build: ./srcs/requirement/nginx
-        container_name: nginx
-		restart: always
-		volumes:
-          - ~/data/wordpress:/data/www
-		ports:
-		  - "443:443"
+	build: ./srcs/requirement/nginx
+	container_name: nginx
+	restart: always
+	volumes:
+		- ~/data/wordpress:/data/www
+	ports:
+		- "443:443"
   db:
-		build: ./srcs/requirement/mariadb
-        container_name: mariadb
-		restart: always
-		secret:
-		  -secret
-		volumes:
-		  - ~/data/mariadb:/var/lib/mariadb
+	build: ./srcs/requirement/mariadb
+	container_name: mariadb
+	env:
+	  .env
+	restart: always
+	secret:
+		-secret
+	volumes:
+		- ~/data/mariadb:/var/lib/mariadb
   wordpress:
-		build: ./srcs/requirement/wordpress
-        container_name: wordpress
-		restart: always
-		secret:
-		  -secret
-		volumes:
-          - ~/data/wordpress:/data/www
+	build: ./srcs/requirement/wordpress
+	container_name: wordpress
+	restart: always
+	secret:
+		-secret
+	volumes:
+		- ~/data/wordpress:/data/www

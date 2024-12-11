@@ -13,6 +13,7 @@ RUN apt-get update -y && apt-get upgrade -y && apt-get install -y \
 		&& rm -rf /var/lib/apt/lists/* #delete the cache
 #-----------------------------------------#
 
+#-----CREATE CETRIFICATE AND KEY ---------#
 RUN mkdir -p /etc/nginx/ssl && openssl req  -x509 -new -newkey rsa:4096 -nodes -days 3650 \
 		-out /etc/nginx/ssl/certificate.pem \
 		-keyout /etc/nginx/ssl/key.pem \
