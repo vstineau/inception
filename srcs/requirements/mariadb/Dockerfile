@@ -13,7 +13,7 @@ RUN apt-get update -y && apt-get install -y mariadb-server \
 #-----------------------------------------#
 
 #------------CONFIGURE MARIADB------------#
-#COPY mariadbconfig
+COPY 50-server.cnf /etc/mysql/mariadb-conf.d/
 #-----------------------------------------#
 
 COPY mariadb_setup.sh ~/
@@ -26,5 +26,6 @@ EXPOSE 3306
 ENTRYPOINT ["sh", "~/mariadb_setup.sh"]
 
 #-----------------------------------------#
-CMD ["mariadbd"]
+CMD ["tail", "-f"]
+#CMD ["mariadbd"]
 
