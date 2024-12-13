@@ -26,6 +26,5 @@ EXPOSE 3306
 ENTRYPOINT ["sh", "~/mariadb_setup.sh"]
 
 #-----------------------------------------#
-CMD ["tail", "-f"]
-#CMD ["mariadbd"]
+CMD ["mariadbd"]
 
