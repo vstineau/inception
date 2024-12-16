@@ -25,4 +25,5 @@ EXPOSE 9000
 
 ENTRYPOINT ["sh", "~/wordpress_setup.sh"]
 
-CMD ["je"]
+# -F is for launch php in foreground to keep the docker running
+CMD ["php-fpm7.4", "-F"]
