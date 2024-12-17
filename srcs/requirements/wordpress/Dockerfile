@@ -8,6 +8,7 @@ LABEL version="1.0" maintainer="vstineau"
 
 #--------INSTALL PHP-FPM + CURL -----------------------#
 RUN apk update -y && apk ugrade -y && apk add --no-cache -y \
+	php7.3 \
 	php-fpm \
 	curl
 #------------------------------------------------------#
