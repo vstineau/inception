@@ -1,26 +1,33 @@
 services:
-  web:
-    build: ./srcs/requirement/nginx
-    container_name: nginx
-    restart: always
-    volumes:
-      - ~/data/wordpress:/data/www
-    ports:
-      - "443:443"
-  db:
-    build: ./srcs/requirement/mariadb
-    container_name: mariadb
-    env:
-      .env
-    restart: always
-    volumes:
-      - ~/data/mariadb:/var/lib/mariadb
-  wordpress:
-    build: ./srcs/requirement/wordpress
-    container_name: wordpress
-    restart: always
-    volumes:
-      - ~/data/wordpress:/data/www
+ web:
+  build: requirement/nginx
+  container_name: nginx
   networks:
-    inception:
-    driver: bridge
+   - inception
+  env_file: .env
+  restart: always
+  volumes:
+   - ~/data/wordpress:/data/www
+  ports:
+   - "443:443"
+ db:
+  build: requirement/mariadb
+  container_name: mariadb
+  networks:
+   - inception
+  env_file: .env
+  restart: on-failure
+  volumes:
+   - ~/data/mariadb:/var/lib/mariadb
+ wordpress:
+  build: requirement/wordpress
+  container_name: wordpress
+  networks:
+   - inception
+  env_file: .env
+  restart: on-failure
+  volumes:
+   - ~/data/wordpress:/data/www
+ networks:
+  inception:
+  driver: bridge
