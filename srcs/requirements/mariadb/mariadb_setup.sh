@@ -1,20 +1,19 @@
 #!/bin/bash
 
-set -e
+#set -e
 
-if [[ ! -d "/var/lib/mysql/$MYSQL_DATABASE" ]]; then 
+if [ ! -d "/var/lib/mysql/$MYSQL_DATABASE" ]; then 
 
 				mariadb-install-db --user=mysql
 				
 				service mariadb start
 				
-				mysql -e "create database \`${MYSQL_DATABASE}\`;"
+				mysql -e "CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};"
 				
-				mysql -e "create user '${MYSQL_USER}'@'localhost' identified by '${MYSQL_PASSWD}';"
+				mysql -e "CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'localhost' IDENTIFIED BY '${MYSQL_PASSWD}';"
+				mysql -e "GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%'localhost';"
 				
-				mysql -e "grant all privileges on DATABASE_NAME.* TO '${MYSQL_USER}'@'localhost';"
-				
-				mysql -e "flush privileges;"
+				mysql -e "FLUSH PRIVILEGES;"
 
 fi
 
