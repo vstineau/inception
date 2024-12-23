@@ -1,6 +1,6 @@
 services:
- web:
-  build: requirement/nginx
+ mginx:
+  build: requirements/nginx
   container_name: nginx
   networks:
    - inception
@@ -10,8 +10,8 @@ services:
    - ~/data/wordpress:/data/www
   ports:
    - "443:443"
- db:
-  build: requirement/mariadb
+ mariadb:
+  build: requirements/mariadb
   container_name: mariadb
   networks:
    - inception
@@ -20,7 +20,9 @@ services:
   volumes:
    - ~/data/mariadb:/var/lib/mariadb
  wordpress:
-  build: requirement/wordpress
+  build: requirements/wordpress 
+  depends_on:
+   -  mariadb
   container_name: wordpress
   networks:
    - inception
@@ -28,6 +30,7 @@ services:
   restart: on-failure
   volumes:
    - ~/data/wordpress:/data/www
- networks:
-  inception:
+
+networks:
+ inception:
   driver: bridge

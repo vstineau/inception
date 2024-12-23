@@ -2,6 +2,7 @@ all:
 	mkdir --parents ~/data/mariadb ~/data/wordpress
 	docker compose -f srcs/docker-compose.yml up 
 clean:
+	docker compose -f srcs/docker-compose.yml down 
 	rm -rf ~/data/mariadb ~/data/wordpress
 
 prune:

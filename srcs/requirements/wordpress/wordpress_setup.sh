@@ -1,14 +1,16 @@
 #set -e #premier commande qui fail quite le scritp
 
-if [ ! -d "/var/www/" ]; then 
+if [ ! -f "/var/www/html/wp-config.php" ]; then 
 
-wp core --allow-root download
+wp-cli.phar core --allow-root download --path="/var/www/html"
 
-wp config create --allow-root --dbname=$MYSQL_DATABASE --dbuser=$MYSQL_USER --dbpass=$MYSQL_PASSWD --dbhost=mariadb:3306 
+#rm /var/www/html/wp-config-sample.php
 
-wp core install --allow-root --url=$DOMAIN_NAME --title=$SITE_NAME --admin_user=$ADMIN_NAME --admin_password=$ADMIN_PASSWD --admin_email=$ADMIN_EMAIL
+wp-cli.phar config create --allow-root --dbname=$MYSQL_DATABASE --dbuser=$MYSQL_USER --dbpass=$MYSQL_PASSWD --url=$DOMAIN_NAME --dbhost="mariadb:3306" --skip-check --path="/var/www/html"
 
-wp user create --allow-root $WP_USER $WP_USER_EMAIL --user_pass=$WP_USER_PASSWD
+wp-cli.phar core install --allow-root --url=$DOMAIN_NAME --title=$SITE_NAME --admin_user=$ADMIN_NAME --admin_password=$ADMIN_PASSWD --admin_email=$ADMIN_EMAIL --path="/var/www/html"
+
+wp-cli.phar user create --allow-root $WP_USER $WP_USER_EMAIL --user_pass=$WP_USER_PASSWD --path="/var/www/html"
 
 fi
 

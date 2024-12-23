@@ -13,17 +13,21 @@ RUN apt-get update -y && apt-get install -y \
 		php7.4-opcache \
 		php7.4-mysqli \
 		curl \
+		vim \
 		unzip \
 		&& rm -rf /var/lib/apt/lists/* #delete the cache
 #------------------------------------------------------#
 
+RUN mkdir -p /var/run/php/ /var/www/html && chown -R  www-data:www-data /var/run/php/
+
 #-------------INSTALL WORDPRESS CLI -------------------#
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
 	&& chmod +x wp-cli.phar \
-	&& mv wp-cli.phar /usr/local/bin/wp
+	&& mv wp-cli.phar /usr/local/bin/
 #------------------------------------------------------#
 
 COPY php.ini /etc/php/7.4/cli/
+
 
 COPY wordpress_setup.sh ~/
 

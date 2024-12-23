@@ -12,6 +12,9 @@ RUN apt-get update -y && apt-get install -y mariadb-server \
 		&& rm -rf /var/lib/apt/lists/* #delete the cache
 #-----------------------------------------#
 
+RUN mkdir -p /var/run/mysqld && chown mysql:mysql /var/run/mysqld
+
+
 #------------CONFIGURE MARIADB------------#
 COPY 50-server.cnf /etc/mysql/mariadb-conf.d/
 #-----------------------------------------#
@@ -21,7 +24,6 @@ COPY mariadb_setup.sh ~/
 #-------------lISTEN PORT 3306------------#
 EXPOSE 3306
 #-----------------------------------------#
-
 
 ENTRYPOINT ["sh", "~/mariadb_setup.sh"]
 
