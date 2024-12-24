@@ -12,8 +12,7 @@ RUN apt-get update -y && apt-get install -y mariadb-server \
 		&& rm -rf /var/lib/apt/lists/* #delete the cache
 #-----------------------------------------#
 
-RUN mkdir -p /var/run/mysqld && chown mysql:mysql /var/run/mysqld
-
+RUN mkdir -p /run/mysqld && chown mysql:mysql /run/mysqld && chmod 777 /run/mysqld
 
 #------------CONFIGURE MARIADB------------#
 COPY 50-server.cnf /etc/mysql/mariadb-conf.d/
