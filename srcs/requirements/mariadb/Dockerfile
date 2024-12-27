@@ -8,7 +8,7 @@ LABEL version="1.0" maintainer="vstineau"
 #-----------------------------------------#
 
 #------------INSTALL MARIADB--------------#
-RUN apt-get update -y && apt-get install -y mariadb-server \
+RUN apt-get update -y && apt-get install -y mariadb-server  vim \
 		&& rm -rf /var/lib/apt/lists/* #delete the cache
 #-----------------------------------------#
 

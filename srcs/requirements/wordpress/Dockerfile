@@ -8,26 +8,23 @@ LABEL version="1.0" maintainer="vstineau"
 
 #--------INSTALL PHP-FPM + CURL -----------------------#
 RUN apt-get update -y && apt-get install -y \
-		php7.4 \
-		php7.4-fpm \
-		php7.4-opcache \
-		php7.4-mysqli \
-		curl \
+		php \
+		php-fpm \
+		php-mysql \
+		wget \
 		vim \
-		unzip \
 		&& rm -rf /var/lib/apt/lists/* #delete the cache
 #------------------------------------------------------#
 
 RUN mkdir -p /var/run/php/ /var/www/html && chown -R  www-data:www-data /var/run/php/
 
 #-------------INSTALL WORDPRESS CLI -------------------#
-RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
-	&& chmod +x wp-cli.phar \
-	&& mv wp-cli.phar /usr/local/bin/
+RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+  && chmod +x wp-cli.phar \
+	&& mv wp-cli.phar /usr/local/bin/wp
 #------------------------------------------------------#
 
-COPY php.ini /etc/php/7.4/cli/
-
+COPY www.conf /etc/php/7.4/fpm/pool.d
 
 COPY wordpress_setup.sh ~/
 
