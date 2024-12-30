@@ -11,7 +11,7 @@ services:
   volumes:
    - wordpress:/var/www/html 
   ports:
-   - "443:443"
+   - 443:443
  mariadb:
   build: requirements/mariadb
   container_name: mariadb
@@ -43,11 +43,11 @@ volumes:
   driver_opts:
    type: none
    o: bind
-   device: "~/data/wordpress"
+   device: ~/data/wordpress
  mariadb:
   driver: local
   driver_opts:
    type: none
    o: bind
-   device: "~/data/mariadb"
+   device: ~/data/mariadb
   

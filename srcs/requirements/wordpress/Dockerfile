@@ -13,6 +13,7 @@ RUN apt-get update -y && apt-get install -y \
 		php-mysql \
 		wget \
 		vim \
+		netcat \
 		&& rm -rf /var/lib/apt/lists/* #delete the cache
 #------------------------------------------------------#
 

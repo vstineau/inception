@@ -9,6 +9,7 @@ LABEL version="1.0" maintainer="vstineau"
 #-------------INSTALL NGINX---------------#
 RUN apt-get update -y && apt-get upgrade -y && apt-get install -y \
 		nginx \
+		netcat \
 		openssl \
 		&& rm -rf /var/lib/apt/lists/* #delete the cache
 #-----------------------------------------#
