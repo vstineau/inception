@@ -1,6 +1,5 @@
-#!/bin/bash
 
-set -e
+#set -e
 
 
 if [ ! -d "/var/lib/mysql/$MYSQL_DATABASE" ]; then 

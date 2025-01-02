@@ -23,7 +23,11 @@ wp core install --allow-root \
 				--admin_email=$ADMIN_EMAIL  \
 				--path="/var/www/html"
 
-wp user create --allow-root $WP_USER $WP_USER_EMAIL --user_pass=$WP_USER_PASSWD --path="/var/www/html"
+				wp user create --allow-root $WP_USER $WP_USER_EMAIL --user_pass=$WP_USER_PASSWD --path="/var/www/html"
+				
+				wp theme install online-video-games  --allow-root --path="/var/www/html"
+				
+				wp theme activate online-video-games  --allow-root --path="/var/www/html"
 
 fi
 
