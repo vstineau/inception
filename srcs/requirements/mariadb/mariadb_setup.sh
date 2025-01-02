@@ -1,27 +1,25 @@
 #!/bin/bash
 
-#set -e
+set -e
 
 
 if [ ! -d "/var/lib/mysql/$MYSQL_DATABASE" ]; then 
 
-				mariadb-install-db --user=mysql
+				mariadb-install-db --user=mysql --datadir=/var/lib/mysql
 
-				service mariadb start
+				/etc/init.d/mariadb start
 				
-				mysql -e "CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};"
+				mariadb -e "CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};"
 				
-				mysql -e "CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'localhost' IDENTIFIED BY '${MYSQL_PASSWD}';"
+				mariadb -e "CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWD}';"
 
-				mysql -e "GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'localhost' IDENTIFIED BY '${MYSQL_PASSWD}';"
+				mariadb -e "GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWD}';"
 				
-				mysql -e "FLUSH PRIVILEGES;"
+				mariadb -e "FLUSH PRIVILEGES;"
 
-				service mariadb stop
+				/etc/init.d/mariadb stop
 
 fi
-
-# mysqladmin -u${MYSQL_USER} -p${MYSQL_PASSWORD} shutdown && mysqld_safe
 
 exec "$@"
 

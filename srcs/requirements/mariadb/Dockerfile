@@ -12,7 +12,7 @@ RUN apt-get update -y && apt-get install -y mariadb-server  vim netcat\
 		&& rm -rf /var/lib/apt/lists/* #delete the cache
 #-----------------------------------------#
 
-RUN mkdir -p /run/mysqld && chown mysql:mysql /run/mysqld && chmod 777 /run/mysqld
+RUN mkdir -p /run/mysqld && chown -R  mysql:mysql /run/mysqld && chmod 777 /run/mysqld
 
 #------------CONFIGURE MARIADB------------#
 COPY 50-server.cnf /etc/mysql/mariadb.conf.d/
@@ -27,5 +27,5 @@ EXPOSE 3306
 ENTRYPOINT ["sh", "~/mariadb_setup.sh"]
 
 #-----------------------------------------#
-CMD ["mariadbd"]
+CMD ["mariadbd", "--datadir=/var/lib/mysql"]
 
